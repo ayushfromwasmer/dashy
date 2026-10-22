@@ -51,6 +51,16 @@ You can use [this link](https://www.hostg.xyz/aff_c?offer_id=48&aff_id=243972&ur
 [Cloudflare Pages](https://pages.cloudflare.com/) is static hosting on Cloudflare's edge. Import the repo, set build command `yarn build`, and set output directory `dist`.
 
 
+### Wasmer
+
+[![Deploy to Wasmer](https://img.shields.io/badge/Deploy%20to-Wasmer-171717?logo=wasmer&logoColor=white)](https://wasmer.io/apps/create?github=lissy93%2Fdashy)
+
+[Wasmer Edge](https://docs.wasmer.io/edge/) is a cloud hosting platform powered by WebAssembly. Edit `user-data/conf.yml`, install dependencies with `yarn --frozen-lockfile`, run `yarn build`, and use `dist` as the output directory. The included [Anybuild file](../../Anybuild) configures static hosting and client-side routing.
+
+The button opens the import page for this public repository; review the build settings before deploying. To keep your own configuration in Git and deploy updates, fork this repository and import your own fork.
+
+This is a static deployment: saving configuration through the UI, server-side status checks, and the CORS proxy are unavailable. Edit your configuration in Git and redeploy instead. A cloud deployment cannot access services that are only reachable on your home network.
+
 ### Firebase Hosting
 
 [Firebase Hosting](https://firebase.google.com/products/hosting) is static hosting on Google's CDN. Run `yarn build`, deploy `dist` with the Firebase CLI, and add an SPA rewrite to `index.html`.
