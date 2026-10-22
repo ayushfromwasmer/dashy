@@ -3,11 +3,26 @@ load("//anybuild/tools:staticfile.bzl", "staticfile_serve")
 
 config = nodestatic_config(
     schema = 1,
+    static_redirects_config = """
+[[advanced.rewrites]]
+source = "/assets/**"
+destination = "$0"
+
+[[advanced.rewrites]]
+source = "/**/*.*"
+destination = "$0"
+
+[[advanced.rewrites]]
+source = "/**"
+destination = "/index.html"
+
+""",
     commands = {"install": "yarn --frozen-lockfile"},
     node_package_manager = "yarn",
     yarn_version = "1.22.22",
     node_version = "24",
     node_build_command = "yarn build",
+    node_install_requires_all_files = True,
     static_dir = "dist",
 )
 
@@ -19,8 +34,8 @@ staticfile_serve(
     name = "dashy",
     provider = "node-static",
     extra_commands = {
-        "start": "static-web-server --root='{}' --page-fallback='{}/index.html' --log-level=info --port={}".format(
-            build.static_app.serve_path, build.static_app.serve_path, config.port,
+        "start": "static-web-server --root='{}' --config-file='{}/sws.toml' --log-level=info --port={}".format(
+            build.static_app.serve_path, build.static_config.serve_path, config.port,
         ),
     },
 )
